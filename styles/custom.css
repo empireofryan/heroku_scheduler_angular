@@ -1,0 +1,16 @@
+.add-item {
+  width: 100%;
+}
+.card {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #DCDCDD;
+  border-radius: 4px;
+  background-color: white;
+}
+.text-uppercased {
+  text-transform: uppercase;
+}
+.card-body {
+  margin-top: 10px;
+}

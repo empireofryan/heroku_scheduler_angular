@@ -1,0 +1,59 @@
+<div class="card">
+  <form name="cardForm">
+    <input type="hidden" name="id" ng-model="item.id"/>
+    <div class="input-group">
+      <span class="input-group-addon">$</span>
+      <input type="text" class="form-control" placeholder="rake do_something" ng-model="item.code" ng-disabled="true" ng-if="!isEditing"/>
+      <input type="text" class="form-control" placeholder="rake do_something" name="code" ng-model="editItem.code" ng-required="true" ng-if="isEditing"/>
+    </div>
+    <div class="row card-body">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="text-uppercased">dyno size</label>
+          <div>
+            <span ng-if="!isEditing">{{item.dynoSize}}</span>
+            <select ng-options="option for option in dynoSizeList" ng-model="editItem.dynoSize" name="dynoSize" ng-required="true" ng-if="isEditing"></select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="text-uppercased">frequency</label>
+          <div>
+            <span ng-if="!isEditing">{{ getFrequency(item.frequency) }}</span>
+            <select ng-options="option.id as option.name for option in frequencyList" ng-model="editItem.frequency" name="frequency" ng-required="true" ng-if="isEditing" ng-change="changeFrequency()"></select>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="text-uppercased">last run</label>
+          <div>
+            <span>{{item.lastRun}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="text-uppercased">next due</label>
+          <div> 
+            <span ng-if="!isEditing || editItem.frequency == 3">{{ getDateByFormat(item.nextDue, 'ddd D HH:mm') }}</span>
+            <div ng-if="isEditing && editItem.frequency == 1">
+              {{ getDateByFormat(editItem.nextDue, 'ddd D') }}
+              <select ng-model="calcNextDue.time" name="nextDue" ng-required="true">
+                <option ng-repeat="time in dailyList track by $index" value="{{time.value}}" ng-disabled="time.disabled">{{time.name}}</option>
+              </select>
+            </div>
+            <select ng-if="isEditing && editItem.frequency == 2" ng-model="calcNextDue.time" name="nextDue" ng-required="true">
+              <option ng-repeat="time in hourlyList track by $index" value="{{time.value}}" ng-disabled="time.disabled">{{time.name}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <button class="btn btn-primary" ng-click="saveChange()" ng-disabled="cardForm.$invalid">{{ isEditing? 'Save' : 'Edit' }}</button>
+      <button class="btn btn-default" ng-click="cancel()">{{ isEditing? 'Cancel' : 'Remove' }}</button>
+    </div>
+  </form>
+</div>
