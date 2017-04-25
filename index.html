@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Scheduler</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="styles/custom.css"/>
+  </head>
+
+  <body ng-app="app" ng-controller="MainCtrl">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <div class="cards">
+            <h3 class="text-center" ng-if="items.length == 0">You don't have any schedule.</h3>
+            <card-item
+              ng-repeat="item in items"
+              item="item"
+              on-save="saveItem({ item: item })"
+              on-delete="deleteItem({id: id})"></card-item>
+          </div>
+          <button class="btn btn-success add-item" ng-click="addItem()" ng-show="isShowAddBtn">Add new job</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  </body>
+</html>
