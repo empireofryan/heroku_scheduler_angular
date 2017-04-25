@@ -18,10 +18,10 @@
         <div class="col-md-8 col-md-offset-2">
           <div class="cards">
             <h3 class="text-center" ng-if="items.length == 0">You don't have any schedule.</h3>
-            <card-item
-              ng-repeat="item in items"
-              item="item"
-              on-save="saveItem({ item: item })"
+            <card-item 
+              ng-repeat="item in items" 
+              item="item" 
+              on-save="saveItem({ item: item })" 
               on-delete="deleteItem({id: id})"></card-item>
           </div>
           <button class="btn btn-success add-item" ng-click="addItem()" ng-show="isShowAddBtn">Add new job</button>
@@ -31,5 +31,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/directive.js"></script>
+    <script src="app/controller.js"></script>
   </body>
 </html>
